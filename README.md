@@ -2,10 +2,11 @@
 
 <aside>
 💡 The website is divided into two modules:
+    
 ● Student
 ● Admin
-
 </aside>
+<br>
 
 ● Admin Module Features 
 
