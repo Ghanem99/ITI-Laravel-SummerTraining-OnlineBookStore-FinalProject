@@ -47,24 +47,20 @@ Route::middleware('auth')->group(function () {
 
 // Admin Routes
 Route::middleware(['auth', 'admin'])->group(function () {
+    // refactor and use model relation!
     Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin/users');
     Route::get('/admin/books', [AdminDashboardController::class, 'books'])->name('admin/books');
+    // end refactor and use model relation!
+
     Route::get('/admin/returned-books', [AdminDashboardController::class, 'returnedBooks'])->name('admin/returned-books');
     Route::get('/admin/borrowed-books', [AdminDashboardController::class, 'borrowedBooks'])->name('admin/borrowed-books');
 
-    Route::get('/admin/books/create', [AdminBookController::class, 'create'])->name('books.create');
-    Route::post('/admin/books', [AdminBookController::class, 'store'])->name('books.store');
-    Route::get('/admin/books/{book}/edit', [AdminBookController::class, 'edit'])->name('books.edit');
-    Route::patch('/admin/books/{book}', [AdminBookController::class, 'update'])->name('books.update');
-    Route::delete('/admin/books/{book}', [AdminBookController::class, 'destroy'])->name('books.destroy');
+    Route::group(['prefix', 'admin'], function () {
+        Route::resource('book', BookController::class);
+    });
 
     // route to create a user 
-    Route::get('/admin/users/create', [AdminUserController::class, 'create'])->name('users.create');
-    Route::post('/admin/users', [AdminUserController::class, 'store'])->name('users.store');
-    Route::get('/admin/users/{user}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
-    Route::patch('/admin/users/{user}', [AdminUserController::class, 'update'])->name('users.update');
-    Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
-
+    Route::resource('user', UserController::class);
 });
 
 
