@@ -60,7 +60,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     });
 
     // route to create a user 
-    Route::resource('user', UserController::class);
+    Route::resource('user', AdminUserController::class);
 });
 
 
