@@ -2,21 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Book;
-use App\Models\BorrowedBook;
-
 
 class DashboardController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        // return only if the book is not returned
-        $books = BorrowedBook::where('is_returned', 0)->get();
+        $books = Book::all();
 
-        return view('user/dashboard', [
-            'books' => $books
-        ]);
+        return view('user.dashboard', ['books' => $books]);
     }
 }

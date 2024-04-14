@@ -37,9 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
     Route::get('/books', [BookController::class, 'index'])->name('books.index');
-    Route::post('/books/{book}', [BookController::class, 'borrow'])->name('books.borrow');
-    Route::patch('/books/{book}', [BookController::class, 'return'])->name('books.return');
-    Route::get('/users/returned-books', [ReturnedBookController::class, 'index'])->name('returned-books');
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -47,21 +44,10 @@ Route::middleware('auth')->group(function () {
 
 // Admin Routes
 Route::middleware(['auth', 'admin'])->group(function () {
-    // refactor and use model relation!
-    Route::get('/admin/users', [AdminDashboardController::class, 'users'])->name('admin/users');
-    Route::get('/admin/books', [AdminDashboardController::class, 'books'])->name('admin/books');
-    // end refactor and use model relation!
-
-    Route::get('/admin/returned-books', [AdminDashboardController::class, 'returnedBooks'])->name('admin/returned-books');
-    Route::get('/admin/borrowed-books', [AdminDashboardController::class, 'borrowedBooks'])->name('admin/borrowed-books');
 
     Route::group(['prefix', 'admin'], function () {
         Route::resource('book', BookController::class);
     });
-
-    // route to create a user 
-    Route::resource('user', AdminUserController::class);
 });
-
 
 require __DIR__.'/auth.php';
