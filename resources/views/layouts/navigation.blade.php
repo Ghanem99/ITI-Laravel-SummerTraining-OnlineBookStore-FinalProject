@@ -23,12 +23,6 @@
                             Books
                         </x-nav-link>
                     </div>
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('returned-books')" :active="request()->routeIs('returned-books')">
-                            {{ __('Returned-Books') }}
-                        </x-nav-link>
-                    </div>
                 @endif
 
                 @if(Auth::user()->is_admin == true)
@@ -42,18 +36,6 @@
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                         <x-nav-link :href="route('admin/users')" :active="request()->routeIs('admin/users')">
                             {{ __('Users') }}
-                        </x-nav-link>
-                    </div>
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('admin/borrowed-books')" :active="request()->routeIs('admin/borrowed-books')">
-                            {{ __('Borrowed-Books') }}
-                        </x-nav-link>
-                    </div>
-
-                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('admin/returned-books')" :active="request()->routeIs('admin/returned-books')">
-                            {{ __('Returned-Books') }}
                         </x-nav-link>
                     </div>
                 @endif
